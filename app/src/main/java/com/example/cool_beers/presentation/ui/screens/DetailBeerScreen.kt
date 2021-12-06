@@ -1,13 +1,14 @@
 package com.example.cool_beers.presentation.ui.screens
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.AnnotatedString
-import com.example.cool_beers.common.allFood
-import com.example.cool_beers.common.allIngredients
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import com.example.cool_beers.data.model.BeerIngredient
 import com.example.cool_beers.data.model.BeerResponse
 import com.example.cool_beers.domain.PresentationData
@@ -45,9 +46,18 @@ fun Beer(beer: BeerResponse) {
             Text(text = beer.first_brewed)
             Text(text = beer.ibu.toString())
             Text(text = beer.description)
-            Text(text = beer.ingredients.yeast)
-            Text(text = beer.food_pairing.allFood())
-
+            Text(text = "Ingredients: " , fontWeight = FontWeight.Bold )
+            Text(text = beer.ingredients.yeast + " + " )
+            for (i in beer.ingredients.malt ) {
+                Text(text = i.name)
+            }
+            for (i in beer.ingredients.hops ) {
+                Text(text = i.name)
+                }
+            Text(text = "Food it goes well with: " , fontWeight = FontWeight.Bold )
+            for (i in beer.food_pairing) {
+                Text(text = i)
+            }
         }
     }
 }
